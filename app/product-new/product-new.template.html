@@ -1,0 +1,109 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="py-5 text-center">
+            <h1>Ny produkt</h1>
+            <p class="lead">Skapa enkelt en ny produkt genom att fylla i fälten och tryck på spara.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Main row-area -->
+    <div class="col-md-4 order-md-2 mb-4">
+        <!-- left column area -->
+        [Placeholder for adding image]
+        <!-- End of left column area -->
+    </div>
+
+    <div class="col-md-8 order-md-1 mb-4">
+        <!-- Right column area -->
+        <div class="card ">
+            <!-- Add product card -->
+            <div class="card-header">
+                <h4 class="card-title">Ny produkt</h4>
+                <p class="card-subtitle text-muted">Fyll i formuläret.</p>
+            </div>
+
+            <div class="card-body">
+                <!-- Card-body -->
+                <div ng-form="$ctrl.newproductform">
+                    <!-- Form-area for new product -->
+                    <div class="form-row">
+                        <!--  Form-row -->
+
+                        <div class="form-group col-md-12">
+                            <label for="name">Produktnamn</label>
+                            <input type="text" class="form-control" ng-class="{'is-invalid': $ctrl.newproductform.name.$touched && $ctrl.newproductform.name.$invalid}" id="name" placeholder="Produktnamn" name="name" ng-model="$ctrl.newproduct.name" required>
+                            <small class="invalid-feedback" ng-show="$ctrl.newproductform.name.$touched && $ctrl.newproductform.name.$invalid">Produktnamn saknas.</small>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label for="sku">Artikelnummer</label>
+                            <input type="text" class="form-control" ng-class="{'is-invalid': $ctrl.newproductform.sku.$touched && $ctrl.newproductform.sku.$invalid}" id="sku" name="sku" placeholder="Artikelnummer" ng-model="$ctrl.newproduct.sku" required>
+                            <small class="invalid-feedback" ng-show="$ctrl.newproductform.sku.$touched && $ctrl.newproductform.sku.$invalid">Artikelnummer saknas</small>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label for="description">Beskrivning</label>
+                            <textarea class="form-control"  id="description" name="description" placeholder="Beskrivning" ng-model="$ctrl.newproduct.description"></textarea>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label class="col-form-label col-form-label-sm" for="price">Pris <small>inkl. moms</small></label>
+                            <input type="number" ng-change="$ctrl.setTaxExluded()" ng-class="{'is-invalid': $ctrl.newproductform.price.$touched && $ctrl.newproductform.price.$invalid}" min="1" class="form-control form-control-sm" id="price" name="price" value="0.0" step="0.01" ng-model="$ctrl.newproduct.price.price" required>
+                            <small class="invalid-feedback" ng-show="$ctrl.newproductform.price.$touched && $ctrl.newproductform.price.$invalid">
+                                Pris måste anges
+                            </small>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="col-form-label col-form-label-sm" for="taxecluded">Pris <small>exkl. moms</small></label>
+                            <input type="number" ng-change="$ctrl.setTaxIncluded()" ng-class="{'is-invalid': $ctrl.productform.newproductform.$touched && $ctrl.newproductform.newproductform.$invalid}" class="form-control form-control-sm" id="taxecluded" name="taxecluded" value="0.0" step="0.01" ng-model="$ctrl.newproduct.price.taxExcluded" required>
+                            <small class="invalid-feedback" ng-show="$ctrl.newproductform.newproductform.$touched && $ctrl.newproductform.newproductform.$invalid">
+                                Pris måste anges.
+                            </small>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label class="col-form-label col-form-label-sm" for="taxrate">Moms</label>
+                            <select id="taxrate" ng-change="$ctrl.setTaxExluded()" ng-class="{'is-invalid': $ctrl.newproductform.taxrate.$touched && $ctrl.newproductform.taxrate.$invalid}" name="taxrate" class="form-control form-control-sm" ng-model="$ctrl.newproduct.price.taxrate" required>
+                                <option value="0">0%</option>
+                                <option value="6">6%</option>
+                                <option value="12">12%</option>
+                                <option value="25">25%</option>
+                            </select>
+                            <small class="invalid-feedback" ng-show="$ctrl.newproductform.taxrate.$touched && $ctrl.newproductform.taxrate.$invalid">
+                                Pric (inkl. moms.) saknas
+                            </small>
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label class="col-form-label col-form-label-sm" for="unitType">Enhet</label>
+                            <select  ng-class="{'is-invalid': $ctrl.newproductform.unittype.$touched && $ctrl.newproductform.newproductform.$invalid}" id="unittype" name="unittype" class="form-control form-control-sm" ng-model="$ctrl.newproduct.unitType" required>
+                                <option value="st">st</option>
+                                <option value="kg">kg</option>
+                                <option value="liter">liter</option>
+                                <option value="fpk">förpackning</option>
+                            </select>
+                            <small class="invalid-feedback" ng-show="$ctrl.newproductform.unittype.$touched && $ctrl.newproductform.unittype.$invalid">
+                                Typ av enhet saknas
+                            </small>
+                        </div>
+                        <div class="col-md-4 offset-8" >
+                            <button class="btn btn-success ml-2 ml-25 float-right" ng-disabled="!$ctrl.newproductform.$valid" ng-click="$ctrl.postProduct()">Spara</button>
+                            <button class="btn btn-danger ml-2 ml-25 float-right" ng-click="$ctrl.cancelNew()">Avbryt</button>
+
+                        </div>
+                        <!-- End of form-row -->
+                    </div>
+
+                    <!-- End of ara for new product -->
+                </div>
+
+                <!-- End of card-body -->
+            </div>
+            <!-- End of add product card -->
+        </div>
+        <!-- End of left column area -->
+    </div>
+    <!-- End of main row-area-->
+</div>

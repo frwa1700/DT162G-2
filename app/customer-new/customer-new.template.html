@@ -1,0 +1,94 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="py-5 text-center">
+            <h1>Ny kund</h1>
+            <p class="lead">Skapa enkelt en ny kund genom att fylla i fälten och tryck på spara.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Main row-area -->
+    <div class="col-md-4 order-md-2 mb-4">
+        <!-- left column area -->
+
+        <!-- End of left column area -->
+    </div>
+
+    <div class="col-md-8 order-md-1 mb-4">
+        <!-- Right column area -->
+        <div class="card ">
+            <!-- Add customer card -->
+            <div class="card-header">
+                <h4 class="card-title">Kundinformation</h4>
+                <p class="card-subtitle text-muted">Fyll i formuläret.</p>
+            </div>
+
+            <div class="card-body">
+                <!-- Card-body -->
+                <div ng-form="$ctrl.customerform">
+                    <!-- Form-area for new product -->
+                    <div class="form-row">
+                        <!--  Form-row -->
+                        <div class="form-group col-md-12">
+                            <label for="customername">Namn</label>
+                            <input type="text" class="form-control" ng-class="{'is-invalid': $ctrl.customerform.customername.$touched && $ctrl.customerform.customername.$invalid}" id="customername" name="customername" placeholder="Kundens namn" ng-model="$ctrl.customer.name" required>
+                            <small class="invalid-feedback" ng-show="$ctrl.customerform.customername.$touched && $ctrl.customerform.customername.$invalid">
+                                Namn saknas.
+                            </small>
+                        </div>
+                        <!-- Only shows after selected name -->
+                        <div class="form-group col-md-12">
+                            <label for="customeradress">Adress</label>
+                            <input type="text" class="form-control" ng-class="{'is-invalid': $ctrl.customerform.customeradress.$touched && $ctrl.customerform.customeradress.$invalid}" id="customeradress" name="customeradress" placeholder="Gatuadress" ng-model="$ctrl.customer.adress" required>
+                            <small class="invalid-feedback" ng-show="$ctrl.customerform.customeradress.$touched && $ctrl.customerform.customeradress.$invalid">
+                                Adress saknas.
+                            </small>
+
+                        </div>
+
+
+                        <div class="form-group col-md-3">
+                            <label for="customerzipcode">Postnummer</label>
+                            <input type="text" class="form-control" ng-class="{'is-invalid': $ctrl.customerform.customerzipcode.$touched && $ctrl.customerform.customerzipcode.$invalid}" id="customerzipcode" name="customerzipcode" placeholder="Postnummer" ng-model="$ctrl.customer.zipcode" required>
+                            <small class="invalid-feedback" ng-show="$ctrl.customerform.customerzipcode.$touched && $ctrl.customerform.customerzipcode.$invalid">
+                                Postnummer saknas.
+                            </small>
+                        </div>
+
+                        <div class="form-group col-md-9">
+                            <label for="customercity">Ort</label>
+                            <input type="text" class="form-control" ng-class="{'is-invalid': $ctrl.customerform.customercity.$touched && $ctrl.customerform.customercity.$invalid}" id="customercity" placeholder="Stad" name="customercity" ng-model="$ctrl.customer.city" required>
+                            <small class="invalid-feedback" ng-show="$ctrl.customerform.customercity.$touched && $ctrl.customerform.customercity.$invalid">
+                                Ort saknas.
+                            </small>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="namn@domän.se" ng-model="$ctrl.customer.email">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="phone">Telefon</label>
+                            <input type="tel" class="form-control" id="phone" placeholder="Telefonnummer" ng-model="$ctrl.customer.phone">
+                        </div>
+
+                        <div class="col-md-4 offset-8" >
+                            <button class="btn btn-success ml-2 ml-25 float-right" ng-disabled="!$ctrl.customerform.$valid" ng-click="$ctrl.postCustomer()">Spara</button>
+                            <button class="btn btn-danger ml-2 ml-25 float-right" ng-click="$ctrl.cancelNew()">Avbryt</button>
+                        </div>
+
+                        <!-- End of form-row -->
+                    </div>
+
+                    <!-- End of ara for new product -->
+                </div>
+
+                <!-- End of card-body -->
+            </div>
+            <!-- End of add product card -->
+        </div>
+        <!-- End of left column area -->
+    </div>
+    <!-- End of main row-area-->
+</div>

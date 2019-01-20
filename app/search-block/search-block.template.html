@@ -1,0 +1,14 @@
+
+ <form class="card p-2">
+     <h3 class="text-muted " ng-if="$ctrl.settings.title = ''" >Titel{{ $ctrl.settings.title }}</h3>
+     <div class="input-group">
+         <input type="text" class="form-control" placeholder="{{ $ctrl.settings.searchtext }}"  ng-model="$ctrl.result.name" ng-change="$ctrl.searchQuery($ctrl.result.name)"  list="{{ $ctrl.settings.type }}-datalist" >
+         <datalist  id="{{ $ctrl.settings.type }}-datalist">
+             <option ng-repeat="result in $ctrl.resultList" value="{{ result.name }}">{{ result.name }}</option>
+         </datalist>
+         <div class="input-group-append">
+             <button type="submit" ng-click="$ctrl.addExisting()" class="btn btn-secondary" ng-show="!$ctrl.addnew">Hämta</button>
+             <button type="submit" ng-click="$ctrl.addNew()" class="btn btn-secondary" ng-show="$ctrl.addnew">Skapa ny</button>
+         </div>
+     </div>
+ </form>

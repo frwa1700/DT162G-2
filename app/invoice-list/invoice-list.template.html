@@ -1,0 +1,105 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="py-5 text-center">
+            <h1>Fakturor</h1>
+            <p class="lead">Hantering av fakturor. Radera eller visa för utskrift.
+            </p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 mb-3">
+        <a href="#!/new/invoice" class="btn btn-outline-primary">Ny faktura</a>
+    </div>
+
+    <div class="col-md-12">
+
+        <table class="table table-hover">
+            <thead class="thead-light">
+            <tr role="row">
+                <th class="details-control" style="width: 41px;"></th>
+                <th class="">
+                    <a href="javascript:void(0);" ng-click="$ctrl.sortType = 'customer.name'; $ctrl.sortReverse = !$ctrl.sortReverse">Kundnamn
+                    <span ng-show="$ctrl.sortType == 'customer.name' && !$ctrl.sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="$ctrl.sortType == 'customer.name' && $ctrl.sortReverse" class="fa fa-caret-up"></span>
+                    <span ng-show="$ctrl.sortType != 'customer.name'" class="fa fa-sort"></span>
+                    </a>
+                </th>
+                <th class="">
+                    <a href="javascript:void(0);" ng-click="$ctrl.sortType = 'dateCreated'; $ctrl.sortReverse = !$ctrl.sortReverse">Orderdatum
+                    <span ng-show="$ctrl.sortType == 'dateCreated' && !$ctrl.sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="$ctrl.sortType == 'dateCreated' && $ctrl.sortReverse" class="fa fa-caret-up"></span>
+                        <span ng-show="$ctrl.sortType != 'dateCreated'" class="fa fa-sort"></span>
+                    </a>
+                </th>
+
+                <th>
+                    Förfallodatum
+                </th>
+                <th class="">
+                    <a href="javascript:void(0);" ng-click="$ctrl.sortType = 'totalSum'; $ctrl.sortReverse = !$ctrl.sortReverse">Ordervärde
+                    <span ng-show="$ctrl.sortType == 'totalSum' && !$ctrl.sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="$ctrl.sortType == 'totalSum' && $ctrl.sortReverse" class="fa fa-caret-up"></span>
+                        <span ng-show="$ctrl.sortType != 'totalSum'" class="fa fa-sort"></span>
+
+                    </a>
+                </th>
+                <th>
+                    Visa
+                </th>
+                <th>
+                    Radera
+                </th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr ng-repeat-start="invoice in $ctrl.invoices | orderBy:$ctrl.sortType:$ctrl.sortReverse | filter:filterProducts">
+                <td class=" details-control" ng-class="{details:invoiceDetails}" ng-click="invoiceDetails = !invoiceDetails"></td>
+                <td>{{invoice.customer.name}}</td>
+                <td>{{invoice.dateCreated | date:'yyyy-MM-dd'}}</td>
+                <td>{{invoice.dateCreated | date:'yyyy-MM-dd'}}</td>
+                <td>{{invoice.totalSum}} kr</td>
+                <td><a href="#!/invoice/{{invoice._id}}">Faktura</a></td>
+                <td class="text-center"><a href="javascript:void(0);"  ng-click="$ctrl.delInvoice(invoice._id)"><i class="fa fa-trash"> </i></a></td>
+            </tr>
+            <tr ng-show="invoiceDetails" ng-repeat-end>
+                <td colspan="7">
+                    <table class="table-child" cellpadding="5px">
+                        <tbody>
+                        <tr>
+                            <td>
+                                Adress:
+                            </td>
+                            <td>
+                                <strong>Leveransadress:</strong>
+                                <p class="adressDiv">
+                                    {{ invoice.customer.name }}<br/>
+                                    {{ invoice.customer.adress}}<br/>
+                                    {{ invoice.customer.zipcode | zipcode }} {{ invoice.customer.city }}
+                                </p>
+                                <button class="btn btn-danger btn-sm active" ng-click="$ctrl.setPayed(invoice._id)" ng-show="!invoice.invoicePayed"><span class="fa fa-times"></span> Ej betald</button>
+                                <button class="btn btn-success btn-sm active" ng-show="invoice.invoicePayed"><span class="fa fa-check"></span>Betald</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Orderrader:
+                            </td>
+                            <td>
+                                <ul class="list-group">
+                                    <li class="list-group-item" ng-repeat="product in invoice.products">
+                                        <span class="adressDiv">{{ product.name }}</span>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

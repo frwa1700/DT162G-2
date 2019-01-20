@@ -1,0 +1,299 @@
+
+<style type="text/css">
+
+
+    @media print {
+        div.container {
+            padding-left: 19mm;
+            padding-right: 10mm;
+            padding-top: 7mm;
+            padding-bottom:0mm;
+        }
+
+    }
+    @page {
+        size: auto;   /* auto is the initial value */
+
+    }
+    body {
+        /*font: 12pt Georgia, "Times New Roman", Times, serif;*/
+        font-family: 'Roboto', sans-serif;
+        font-size: 10pt;
+        line-height: 1.3;
+        -ms-text-size-adjust: 100%;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    /*
+    .row {
+        margin:0px 0px;
+    }
+    .row > div {
+        padding:0px 5px;
+    }
+    */
+    .logoimg {
+        width:300px;
+    }
+
+    .container {
+        margin-right: auto;
+        margin-left: auto;
+
+        border: 0px solid;
+    }
+    .visible-print {
+        display: block !important;
+    }
+
+    .hidden-print {
+        display: none !important;
+    }
+
+    .height {
+        min-height: 200px;
+    }
+
+    .icon {
+        font-size: 47px;
+        color: #5CB85C;
+    }
+
+    .iconbig {
+        font-size: 77px;
+        color: #5CB85C;
+    }
+
+    .table > tbody > tr > .emptyrow {
+        border-top: none;
+        padding: 0px 0px;
+    }
+
+    .table > thead > tr > .emptyrow {
+        border-bottom: none;
+    }
+    .table > thead > tr > .highrow {
+        border-bottom: 2px solid;
+    }
+    .table > tbody > tr > .highrow {
+        border-top: 2px solid;
+        padding: 0px 0px;
+    }
+    .table > tbody > tr > .lowrow {
+        border-top: 1px solid;
+        padding: 0px 0px;
+    }
+
+    .table-invoice tr, td {
+        border: 0;
+        padding: 0;
+    }
+    .table-invoice tr > td {
+        padding: 5px !important;
+    }
+
+</style>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-6">
+                    <h3><strong>Waldfelts data</strong></h3>
+                </div>
+                <div class="col-xs-6 text-left">
+                    <h3><strong>Faktura</strong></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-6">
+                    <img class="logoimg" src="images/wd-logo.png">
+                </div>
+                <div class="col-xs-6 text-right">
+                    <div style="border:1px solid;border-radius:9px;width:100%;padding: 5px 5px;text-align:left;" >
+                        <table width=100%>
+                            <tr>
+                                <td class="small"><em>Datum</em></td>
+                                <td class="small"><em>Kundnummer</em></td>
+                                <td class="small"><em>Fakturanummer</em></td>
+                            </tr>
+                            <tr>
+                                <td style="padding-top:5px;">{{$ctrl.invoice.dateCreated | date:'yyyy-MM-dd'}}</td>
+                                <td style="padding-top:5px;">58</td>
+                                <td style="padding-top:5px;">360</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 small">
+            <div class="row">
+                <div class="col-xs-6">
+
+                </div>
+                <div class="col-xs-6">
+                    <i>Fakturaadress</i>
+                    <p>
+                        {{ $ctrl.invoice.customer.name }}<br/>
+                        {{ $ctrl.invoice.customer.adress}}<br/>
+                        {{ $ctrl.invoice.customer.zipcode | zipcode }} {{ $ctrl.invoice.customer.city }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top:40px;">
+        <div class="col-xs-12 small">
+            <div class="col-xs-6 text-left">
+                <i>Märkning</i>
+            </div>
+            <div class="col-xs-3">
+
+                <i>Betalningsvillkor</i><br>
+                30 Dagar
+
+            </div>
+            <div class="col-xs-3 text-right">
+                <i>Förfallodatum</i><br>
+                2018-01-19            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top:2mm;">
+        <div class="col-xs-12 small">
+            <div class="col-xs-6 text-left">
+                <i>Er referens</i><br>
+            </div>
+            <div class="col-xs-3">
+                <i>Vår referens</i><br>
+                Fredrik Waldfelt
+            </div>
+            <div class="col-xs-3 text-right">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            &nbsp;
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            &nbsp;
+        </div>
+    </div>
+
+    <div class="row" style="margin:0px 0px;height: 490px;";>
+        <div class="col-xs-12">
+            <div class="table-responsives">
+                <table class="table table-invoice">
+                    <thead>
+                    <tr>
+                        <td colspan=6 class="highrow text-right"></td>
+                    </tr>
+                    <tr>
+                        <td><small><strong><i>Artikel</i></strong></small></td>
+                        <td><small><strong><i>Benämning</i></strong></small></td>
+                        <td class="text-center"><small><strong><i>Antal</i></strong></small></td>
+                        <td class="text-center"><small><strong><i>Enhetspris</i></strong></small></td>
+                        <td class="text-center"><small><strong></strong>Moms</small></td>
+                        <td class="text-right"><small><strong><i>Belopp</i></strong></small></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="product in $ctrl.invoice.products">
+                        <td>{{product.sku}}</td>
+                        <td class="text-left">{{product.name}}</td>
+                        <td class="text-center">{{product.quantity}} {{product.unitType}}</td>
+                        <td class="text-center">{{product.price.price}}</td>
+                        <td class="text-center">{{product.price.taxrate}}%</td>
+                        <td class="text-right">{{product.priceTotal}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row" style="padding-left: 8mm;padding-right:8mm;">
+        <div class="col-xs-8" style="border-top:2px solid;padding:2px 0px 0px 0px;">
+            <img src="http://waldfelt.se/boot/qr/42819015.png" width="90" style="margin:0px 0px 0px 0px;">
+        </div>
+        <div class="col-xs-4" style="border-top:2px solid;padding:0px;">
+            <table class="table table-condensed">
+                <tbody>
+                <tr>
+                    <td class="emptyrow text-left">Summa</td>
+                    <td class="emptyrow text-right">{{$ctrl.invoice.totalSumTaxExcluded}}</td>
+                </tr>
+                <tr>
+
+                    <td class="emptyrow text-left">Exkl. moms</td>
+                    <td class="emptyrow text-right">{{$ctrl.invoice.totalSumTaxExcluded}}</td>
+                </tr>
+                <tr>
+
+                    <td class="emptyrow text-left">Momsbelopp 12%</td>
+                    <td class="emptyrow text-right">{{$ctrl.invoice.totalSum - $ctrl.invoice.totalSumTaxExcluded}}</td>
+                </tr>
+                <tr>
+                    <td class="lowrow text-left"><strong>Att betala SEK</strong></td>
+                    <td class="lowrow text-right">{{$ctrl.invoice.totalSum}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row" style="padding-left: 8mm;padding-right:8mm;">
+
+        <div class="col-xs-3 pull-left small" style="padding:0px;">
+            <small><p>Waldfelts Data<br>
+                Bruksvägen 31<br>
+                79690 Älvdalen<br>
+                <br>
+                Godkänd för F-skatt.</p></small>
+        </div>
+        <div class="col-xs-3 small" style="padding:0px;">
+        </div>
+        <div class="col-xs-3 small" style="padding:0px;">
+            <small>
+                <p style="margin:0px 0px 3px 0px;">
+                    <em>Bankgiro</em><br>
+                    532-9230
+                </p>
+                <p style="margin:0px 0px 3px 0px;">
+                    <em>Plusgiro</em><br>
+                    70 03 29-6
+                </p>
+                <p style="margin:0px 0px 3px 0px;">
+                    Swish<br>
+                    123 097 05 90
+                </p>
+            </small>
+        </div>
+        <div class="col-xs-3 text-right small" style="padding:0px;">
+            <small>
+                <p style="margin:0px 0px 3px 0px;">
+                    <em>Telefon</em><br>
+                    0705941458
+                </p>
+                <p style="margin:0px 0px 3px 0px;">
+                    <em>e-post</em><br>
+                    info@ereg.se
+                </p>
+                <p style="margin:0px 0px 3px 0px;">
+                    <em>Org.nr</em><br>
+                    760203-0475
+                </p>
+            </small>
+        </div>
+
+    </div>
+    <link rel="stylesheet" href="css/style.css">

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="dt162gApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+
+
+    <script src="js/angular.js"></script>
+    <script src="js/angular-route.js"></script>
+
+    <!-- Init app -->
+    <script src="app/app.module.js"></script>
+    <script src="app/app.config.js"></script>
+
+    <!-- Core -->
+    <script src="app/core/core.module.js"></script>
+    <script src="app/core/zipcode.filter.js"></script>
+
+    <!-- Product-list -->
+    <script src="app/product-list/product-list.module.js"></script>
+    <script src="app/product-list/product-list.component.js"></script>
+
+    <!-- New product -->
+    <script src="app/product-new/product-new.module.js"></script>
+    <script src="app/product-new/product-new.component.js"></script>
+
+    <!-- List customers -->
+    <script src="app/customer-list/customer-list.module.js"></script>
+    <script src="app/customer-list/customer-list.component.js"></script>
+
+    <!-- New Customer -->
+    <script src="app/customer-new/customer-new.module.js"></script>
+    <script src="app/customer-new/customer-new.component.js"></script>
+
+    <!-- Update customer -->
+    <script src="app/customer-update/customer-update.module.js"></script>
+    <script src="app/customer-update/customer-update.component.js"></script>
+
+    <!-- List invoices -->
+    <script src="app/invoice-list/invoice-list.module.js"></script>
+    <script src="app/invoice-list/invoice-list.component.js"></script>
+
+    <!-- Update product -->
+    <script src="app/product-update/product-update.module.js"></script>
+    <script src="app/product-update/product-update.component.js"></script>
+
+    <!-- invoices -->
+    <script src="app/invoice-detail/invoice-detail.module.js"></script>
+    <script src="app/invoice-detail/invoice-detail.component.js"></script>
+
+    <!-- invoices -->
+    <script src="app/invoice-new/invoice-new.module.js"></script>
+    <script src="app/invoice-new/invoice-new.component.js"></script>
+
+    <!-- Searchblock -->
+    <script src="app/search-block/search-block.module.js"></script>
+    <script src="app/search-block/search-block.component.js"></script>
+
+
+    <title>Waldfelts fakturor</title>
+</head>
+<body>
+<nav class="navbar container">
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link" href="#">Hem</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#!/invoices">Fakturor</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#!/products">Produkter</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#!/customers">Kunder</a>
+        </li>
+    </ul>
+    <a href="mailto:frwa1700@student.miun.se" class="font-weight-light">Fredrik Waldfelt</a>
+</nav>
+<main class="container">
+        <div ng-view></div>
+</main>
+
+</body>
+</html>

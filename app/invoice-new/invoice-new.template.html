@@ -1,0 +1,219 @@
+<div class="fixed-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-6 pb-3" >
+                <button class="btn btn-info float-right ml-2" ng-disabled="!$ctrl.settings.invoiceSaved" ng-click="$ctrl.showInvoice()">Visa</button>
+                <button class="btn btn-success float-right ml-2 " ng-disabled="!$ctrl.customerform.$valid || !$ctrl.settings.productReady" ng-click="$ctrl.saveData()">Spara</button>
+                <button class="btn btn-danger ml-2 ml-25 float-right" ng-click="$ctrl.cancelNew()">Avbryt</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="py-5 text-center">
+            <h1>Ny faktura</h1>
+            <p class="lead">Fyll i kundinformation och lägg till de produkter som fakturan ska innehålla.<br/>
+                För att spara fakturan tryck på spara-knappen.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Main row area -->
+    <div class="col-md-4 order-md-2 mb-4">
+        <!-- Right column area -->
+
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Orderrader</span>
+            <span class="badge badge-secondary badge-pill">{{ $ctrl.newInvoice.orderRows }}</span>
+        </h4>
+
+        <ul class="list-group mb-4 pt-3">
+            <li class="list-group-item d-flex justify-content-between lh-condensed" ng-repeat="product in $ctrl.newInvoice.products">
+                <div>
+                    <h6 class="my-0">{{ product.name }}</h6>
+                    <small class="text-muted">Antal: {{ product.quantity }}</small>
+                </div>
+                <span class="text-muted text-right">{{product.priceTotal}} kr</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <span>Totalt</span>
+                <strong>{{ $ctrl.newInvoice.totalSum }}kr</strong>
+            </li>
+        </ul>
+        <!-- Right column area end -->
+    </div>
+
+    <div class="col-md-8 order-md-1">
+        <!-- Left column area -->
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Kundinformation</h4>
+            <p class="card-subtitle text-muted">Hämta en befintlig kund eller välj att skapa en ny.</p>
+        </div>
+        <div class="card-body">
+            <!-- Searchbox goes here -->
+            <search-block out="$ctrl.customerSearch" type="customer"></search-block>
+            <!-- End of searchbox -->
+        </div>
+        <hr>
+        <div class="card-body">
+            <h5 class="text-muted">Kund</h5>
+            <div ng-form="$ctrl.customerform">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="customername">Namn</label>
+                        <input type="text" class="form-control" ng-class="{'is-invalid': $ctrl.customerform.customername.$touched && $ctrl.customerform.customername.$invalid}" id="customername" name="customername" placeholder="Kundens namn" ng-model="$ctrl.newInvoice.customer.name" required>
+                        <small class="invalid-feedback" ng-show="$ctrl.customerform.customername.$touched && $ctrl.customerform.customername.$invalid">
+                            Namn saknas.
+                        </small>
+                    </div>
+                        <!-- Only shows after selected name -->
+                    <div class="form-group col-md-12">
+                        <label for="customeradress">Adress</label>
+                        <input type="text" class="form-control" ng-class="{'is-invalid': $ctrl.customerform.customeradress.$touched && $ctrl.customerform.customeradress.$invalid}" id="customeradress" name="customeradress" placeholder="Gatuadress" ng-model="$ctrl.newInvoice.customer.adress" required>
+                        <small class="invalid-feedback" ng-show="$ctrl.customerform.customeradress.$touched && $ctrl.customerform.customeradress.$invalid">
+                            Adress saknas.
+                        </small>
+
+                    </div>
+
+
+                    <div class="form-group col-md-3">
+                        <label for="customerzipcode">Postnummer</label>
+                        <input type="text" class="form-control" ng-class="{'is-invalid': $ctrl.customerform.customerzipcode.$touched && $ctrl.customerform.customerzipcode.$invalid}" id="customerzipcode" name="customerzipcode" placeholder="Postnummer" ng-model="$ctrl.newInvoice.customer.zipcode" required>
+                        <small class="invalid-feedback" ng-show="$ctrl.customerform.customerzipcode.$touched && $ctrl.customerform.customerzipcode.$invalid">
+                            Postnummer saknas.
+                        </small>
+                    </div>
+
+                    <div class="form-group col-md-9">
+                        <label for="customercity">Ort</label>
+                        <input type="text" class="form-control" ng-class="{'is-invalid': $ctrl.customerform.customercity.$touched && $ctrl.customerform.customercity.$invalid}" id="customercity" placeholder="Stad" name="customercity" ng-model="$ctrl.newInvoice.customer.city" required>
+                        <small class="invalid-feedback" ng-show="$ctrl.customerform.customercity.$touched && $ctrl.customerform.customercity.$invalid">
+                            Ort saknas.
+                        </small>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="namn@domän.se" ng-model="$ctrl.newInvoice.customer.email">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="phone">Telefon</label>
+                        <input type="tel" class="form-control" id="phone" placeholder="Telefonnummer" ng-model="$ctrl.newInvoice.customer.phone">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                <!-- Only shows after selected name end -->
+
+    </div>
+            <!-- New block -->
+            <hr class="md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Orderrader</h4>
+                    <p class="card-subtitle text-muted">Hämta en produkt eller välj att skapa en ny. Lägg sen till den som orderrad.</p>
+                </div>
+                <!-- Searchbox goes here -->
+                <div class="card-body">
+                    <search-block out="$ctrl.productSearch" type="products"></search-block>
+                </div>
+
+                <div ng-form="$ctrl.productform">
+                    <hr>
+                        <div class="card-body">
+                            <h5 class="text-muted">Lägg till produkt</h5>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="col-form-label col-form-label-sm" for="productname">Produktnamn</label>
+                                    <input type="text" ng-class="{'is-invalid': $ctrl.productform.productname.$touched && $ctrl.productform.productname.$invalid}" class="form-control form-control-sm" id="productname" name="productname" placeholder="Produktnamn" ng-model="$ctrl.searchResult.name" required>
+                                    <small class="invalid-feedback" ng-show="$ctrl.productform.productname.$touched && $ctrl.productform.productname.$invalid">
+                                        Produktnamn saknas.
+                                    </small>
+
+                                </div>
+
+                                <div class="form-group col-md-2">
+                                    <label class="col-form-label col-form-label-sm"  for="sku">Art.no.</label>
+                                    <input type="text" ng-class="{'is-invalid': $ctrl.productform.sku.$touched && $ctrl.productform.sku.$invalid}" class="form-control form-control-sm" id="sku" name="sku" placeholder="Art.no." ng-model="$ctrl.searchResult.sku" required>
+                                    <small class="invalid-feedback" ng-show="$ctrl.productform.sku.$touched && $ctrl.productform.sku.$invalid">
+                                        SKU saknas.
+                                    </small>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label class="col-form-label col-form-label-sm" for="quantity">Antal</label>
+                                    <input type="number" ng-change="$ctrl.updatePrice()" ng-class="{'is-invalid': $ctrl.productform.quantity.$touched && $ctrl.productform.quantity.$invalid}" class="form-control form-control-sm" id="quantity" name="quantity" ng-model="$ctrl.searchResult.quantity" required>
+                                    <small class="invalid-feedback" ng-show="$ctrl.productform.quantity.$touched && $ctrl.productform.quantity.$invalid">
+                                        Antal saknas
+                                    </small>
+                                </div>
+
+                                <div class="form-group col-md-2">
+                                    <label class="col-form-label col-form-label-sm" for="unitType">Enhet</label>
+                                    <select  ng-class="{'is-invalid': $ctrl.productform.unittype.$touched && $ctrl.productform.unittype.$invalid}" id="unittype" name="unittype" class="form-control form-control-sm" ng-model="$ctrl.searchResult.unitType" required>
+                                        <option value="st">st</option>
+                                        <option value="kg">kg</option>
+                                        <option value="liter">liter</option>
+                                        <option value="fpk">förpackning</option>
+                                    </select>
+                                    <small class="invalid-feedback" ng-show="$ctrl.productform.unittype.$touched && $ctrl.productform.unittype.$invalid">
+                                        Typ av enhet saknas
+                                    </small>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="col-form-label col-form-label-sm" for="price">Pris <small>inkl. moms</small></label>
+                                    <input type="number" ng-change="$ctrl.setTaxExluded()" ng-class="{'is-invalid': $ctrl.productform.price.$touched && $ctrl.productform.price.$invalid}" min="1" class="form-control form-control-sm" id="price" name="price" value="0.0" step="0.01" ng-model="$ctrl.searchResult.price.price" required>
+                                    <small class="invalid-feedback" ng-show="$ctrl.productform.price.$touched && $ctrl.productform.price.$invalid">
+                                        Pris måste anges
+                                    </small>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="col-form-label col-form-label-sm" for="taxecluded">Pris <small>exkl. moms</small></label>
+                                    <input type="number" ng-change="$ctrl.setTaxIncluded()" ng-class="{'is-invalid': $ctrl.productform.taxecluded.$touched && $ctrl.productform.taxecluded.$invalid}" class="form-control form-control-sm" id="taxecluded" name="taxecluded" value="0.0" step="0.01" ng-model="$ctrl.searchResult.price.taxExcluded" required>
+                                    <small class="invalid-feedback" ng-show="$ctrl.productform.taxecluded.$touched && $ctrl.productform.taxecluded.$invalid">
+                                        Pris måste anges.
+                                    </small>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label class="col-form-label col-form-label-sm" for="taxrate">Moms</label>
+                                    <select id="taxrate" ng-change="$ctrl.setTaxExluded()" ng-class="{'is-invalid': $ctrl.productform.taxrate.$touched && $ctrl.productform.taxrate.$invalid}" name="taxrate" class="form-control form-control-sm" ng-model="$ctrl.searchResult.price.taxrate" required>
+                                        <option value="0">0%</option>
+                                        <option value="6">6%</option>
+                                        <option value="12">12%</option>
+                                        <option value="25">25%</option>
+                                    </select>
+                                    <small class="invalid-feedback" ng-show="$ctrl.productform.taxrate.$touched && $ctrl.productform.taxrate.$invalid">
+                                        Pric (inkl. moms.) saknas
+                                    </small>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="col-form-label col-form-label-sm" for="saveProduct">Spara till produkter</label>
+                                    <input class="form-control form-control-sm" type="checkbox" ng-model="$ctrl.searchResult.addnew" id="saveProduct">
+
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <p class="text-muted">Totalpris: {{ $ctrl.searchResult.priceTotal }} kr</p>
+                                    <button ng-click="$ctrl.addProduct()" ng-disabled="!$ctrl.productform.$valid" class="col-md-4 btn btn-primary">Lägg till</button>
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+
+
+        <!-- Left column area ends -->
+
+
+        <!-- End of searchbox -->
+
+    </div>
+    <!-- Main row area end -->
+</div>
+

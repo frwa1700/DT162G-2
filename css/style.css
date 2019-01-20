@@ -1,0 +1,86 @@
+body {
+
+    -ms-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /*background-color: #f4f1ed;*/
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    max-width: 960px;
+}
+
+td.details-control {
+    background: url('../images/open.png') no-repeat center center;
+    cursor: pointer;
+}
+td.details-control.details {
+    background: url('../images/close.png') no-repeat center center;
+}
+
+
+.table-child {
+    width: 100%;
+}
+
+.table-child tr{
+    font-weight: normal;
+    border: 1px solid #dbdbdb;
+    color: #3f444c;
+    font-family: 'Roboto', sans-serif;
+
+    line-height: 1.428571429;
+    vertical-align: top;
+}
+
+.table-child tr td:nth-child(1) {
+    width: 20%;
+}
+
+.table-child td strong{
+    font-weight: 700;
+    color: #4d4d4d;
+}
+
+.table-child td p {
+    color: #4d4d4d;
+
+}
+
+.adressDiv {
+    border: dashed 1px orange;
+    resize: none;
+    overflow:auto;
+    font-weight: normal;
+    color: #4d4d4d;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    padding: 8px 8px;
+    display: block;
+
+}
+
+.tableInput, .tableInput:hover {
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    color: inherit;
+    line-height: inherit;
+    height: auto;
+    width: auto;
+    margin: 0;
+}
+.tableInput:focus {
+    background-color: #fff;
+    color: #000;
+}
+
+a, a:visited, a:link {
+    color: #495057;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none !important;
+
+}
